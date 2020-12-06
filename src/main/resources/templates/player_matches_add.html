@@ -93,7 +93,7 @@
                     <div class="col-sm-4">
                         <input oninput="calculateTotal()" type="number" name="tactical_discipline"
                                id="tactical_discipline"
-                               class="form-control input-lg" required="true" min="1" max="10"/>
+                               class="form-control input-lg" required="true" min="1" max="10" maxlength="2"/>
                     </div>
                 </div>
 
@@ -101,7 +101,7 @@
                     <label class="col-sm-8 col-form-label" for="team_play">Team Play</label>
                     <div class="col-sm-4">
                         <input oninput="calculateTotal()" type="number" name="team_play" id="team_play"
-                               class="form-control input-lg" required="true" min="1" max="10"/>
+                               class="form-control input-lg" required="true" min="1" max="10" maxlength="2"/>
                     </div>
                 </div>
 
@@ -109,7 +109,7 @@
                     <label class="col-sm-8 col-form-label" for="defense">Defense</label>
                     <div class="col-sm-4">
                         <input oninput="calculateTotal()" type="number" name="defense" id="defense"
-                               class="form-control input-lg" required="true" min="1" max="10"/>
+                               class="form-control input-lg" required="true" min="1" max="10" maxlength="2"/>
                     </div>
                 </div>
 
@@ -117,25 +117,24 @@
                     <label class="col-sm-8 col-form-label" for="offense">Offense</label>
                     <div class="col-sm-4">
                         <input oninput="calculateTotal()" type="number" name="offense" id="offense"
-                               class="form-control input-lg" required="true" min="1" max="10"/>
+                               class="form-control input-lg" required="true" min="1" max="10" maxlength="2"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-8 col-form-label" for="engagement">Engagement</label>
                     <div class="col-sm-4">
-                        <input oninput="calculateTotal()" type="number" name="engagement" id="engagement"
-                               class="form-control input-lg" required="true" min="1" max="10"/>
+                        <input oninput="calculateTotal()"
+                               type="number" name="engagement" id="engagement"
+                               class="form-control input-lg" required="true" min="1" max="10" maxlength="2"/>
                     </div>
                 </div>
             </div>
 
-            <div class="match-flex"></div>
-
             <div class="d-flex flex-column match-flex justify-content-center align-items-center">
                 <div class="d-flex flex-column justify-content-center mb-xl-5">
-                    <h4 class="mb-3">Total score</h4>
-                    <h3 class="text-center" id="total_evaluation"></h3>
+                    <h3 class="mb-3">Total score</h3>
+                    <h2 class="text-center" id="total_evaluation"></h2>
                 </div>
 
                 <div>

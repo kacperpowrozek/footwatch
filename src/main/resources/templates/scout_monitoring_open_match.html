@@ -43,8 +43,8 @@
     </div>
 
     <ul class="nav nav-tabs mt-5 d-flex justify-content-center">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" aria-selected="true" role="tab" href="#home">
+        <li id="li_player_evaluation" class="nav-item">
+            <a id="player_evaluation" class="nav-link active" data-toggle="tab" aria-selected="true" role="tab" href="#home">
                 Player evaluation
             </a>
         </li>
@@ -76,7 +76,7 @@
                                 <input th:value="${matchEvaluationPlayer.evaluationTacticalDiscipline}" disabled
                                        type="number"
                                        name="tactical_discipline" id="tactical_discipline" class="form-control input-lg"
-                                       required="true" min="1" max="10"/>
+                                       required="true" min="1" max="10" maxlength="2"/>
                             </div>
                         </div>
 
@@ -85,8 +85,7 @@
                             <div class="col-sm-4">
                                 <input th:value="${matchEvaluationPlayer.evaluationTeamPlay}" disabled type="number"
                                        name="team_play" id="team_play" class="form-control input-lg" required="true"
-                                       min="1"
-                                       max="10"/>
+                                       min="1" max="10" maxlength="2"/>
                             </div>
                         </div>
 
@@ -95,7 +94,7 @@
                             <div class="col-sm-4">
                                 <input th:value="${matchEvaluationPlayer.evaluationDefense}" disabled type="number"
                                        name="defense" id="defense" class="form-control input-lg" required="true" min="1"
-                                       max="10"/>
+                                       max="10" maxlength="2"/>
                             </div>
                         </div>
 
@@ -104,7 +103,7 @@
                             <div class="col-sm-4">
                                 <input th:value="${matchEvaluationPlayer.evaluationOffense}" disabled type="number"
                                        name="offense" id="offense" class="form-control input-lg" required="true" min="1"
-                                       max="10"/>
+                                       max="10" maxlength="2"/>
                             </div>
                         </div>
 
@@ -113,17 +112,15 @@
                             <div class="col-sm-4">
                                 <input th:value="${matchEvaluationPlayer.evaluationEngagement}" disabled type="number"
                                        name="engagement" id="engagement"
-                                       class="form-control input-lg" required="true" min="1" max="10"/>
+                                       class="form-control input-lg" required="true" min="1" max="10" maxlength="2"/>
                             </div>
                         </div>
                     </div>
 
-                    <div class="match-flex"></div>
-
                     <div class="d-flex flex-column match-flex justify-content-center align-items-center">
                         <div class="d-flex flex-column justify-content-center mb-xl-5">
-                            <h4 class="mb-3">Total score</h4>
-                            <h3 class="text-center" id="total_evaluation" th:text="${playerScore}"></h3>
+                            <h3 class="mb-3">Total score</h3>
+                            <h2 class="text-center" id="total_evaluation" th:text="${playerScore}"></h2>
                         </div>
                     </div>
                 </div>
@@ -283,12 +280,10 @@
                             </div>
                         </div>
 
-                        <div class="match-flex"></div>
-
                         <div class="d-flex flex-column match-flex justify-content-center align-items-center">
                             <div class="d-flex flex-column justify-content-center mb-xl-5">
-                                <h4 class="mb-3">Total score</h4>
-                                <h3 class="text-center" th:text="${scoutScore}"></h3>
+                                <h3 class="mb-3">Total score</h3>
+                                <h2 class="text-center" th:text="${scoutScore}"></h2>
                             </div>
                         </div>
                     </div>

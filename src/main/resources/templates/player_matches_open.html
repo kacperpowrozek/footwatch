@@ -123,19 +123,17 @@
                 </div>
             </div>
 
-            <div class="match-flex"></div>
-
             <div class="d-flex flex-column match-flex justify-content-center align-items-center">
                 <div class="d-flex flex-column justify-content-center mb-xl-5">
-                    <h4 class="mb-3">Total score</h4>
-                    <h3 class="text-center" id="total_evaluation" th:text="${score}"></h3>
+                    <h3 class="mb-3">Total score</h3>
+                    <h2 class="text-center" id="total_evaluation" th:text="${score}"></h2>
                 </div>
             </div>
         </div>
     </form>
     <div class="d-flex justify-content-center mt-5">
         <a th:href="@{'/player/matches/' + ${match.id} + '/scout_evaluations'}">
-            <button class="btn btn-group-lg btn-primary">See scout evaluations</button>
+            <button class="btn btn-lg btn-primary pr-5 pl-5">See scout evaluations</button>
         </a>
     </div>
 </div>

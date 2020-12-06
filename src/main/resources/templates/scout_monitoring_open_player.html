@@ -8,7 +8,7 @@
 <body>
 <div layout:fragment="content">
     <div class="d-flex w100 justify-content-between">
-        <h1 th:text="'Player' + ' ' + ${player.name} + ' ' + ${player.surname} + ' ' + 'stats'"></h1>
+        <h1 th:text="'Player' + ' ' + ${player.name} + ' ' + ${player.surname} + ' ' + 'match history'"></h1>
         <div>
             <form id="filter_season" class="form-inline" method="get"
                   th:action="@{'/scout/monitoring/open_player/' + ${player.id}}">

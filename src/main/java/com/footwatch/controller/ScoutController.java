@@ -63,6 +63,7 @@ public class ScoutController {
             List<Player> monitoredPlayers = monitoringService.getAllMonitoredPlayers(authentication.getName());
             List<Player> playersWithPendingRequestFromScout = monitoringService.getAllPlayersWithPendingRequest(authentication.getName());
             List<Monitoring> scoutMonitoringList = new ArrayList<>(scout.getMonitoring());
+            scoutMonitoringList.sort(Comparator.comparing(Monitoring::getStartDate).reversed());
             model.addAttribute("monitoredPlayers", monitoredPlayers);
             model.addAttribute("playersWithPendingRequestFromScout", playersWithPendingRequestFromScout);
             model.addAttribute("scout", scout);
