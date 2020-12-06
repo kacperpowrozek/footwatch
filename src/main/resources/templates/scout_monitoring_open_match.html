@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout_scout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Scout monitoring open match</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div th:if="${successText!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${successText}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <h1 th:text="'Match' + ' ' + ${match.homeTeam} + ' vs. ' + ${match.awayTeam}"></h1>
+    <table id="match_history" class="mt-4 table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Home team</th>
+            <th>Result</th>
+            <th>Away team</th>
+            <th>Date</th>
+            <th>Season</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${match.homeTeam}"></td>
+            <td th:text="${match.homeTeamGoals} + ' : ' + ${match.awayTeamGoals}"></td>
+            <td th:text="${match.awayTeam}"></td>
+            <td th:text="${match.date}"></td>
+            <td th:text="${match.season}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <label for="link_to_video">Link to video</label>
+        <input type="text" name="link_to_video" id="link_to_video" class="form-control input-lg"
+               th:value="${match.linkToVideo}" disabled placeholder="Link to video" required="true"/>
+    </div>
+
+    <ul class="nav nav-tabs mt-5 d-flex justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" aria-selected="true" role="tab" href="#home">
+                Player evaluation
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" role="tab" aria-selected="false" href="#menu1">
+                Scout evaluation
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3 d-flex justify-content-center flex-column">
+        <div id="home" class="tab-pane fade show active">
+            <form class="mt-4 d-flex flex-column justify-content-center">
+                <div class="form-group">
+                    <label for="verbal_evaluation">Your verbal evaluation of this match</label>
+                    <textarea class="form-control input-lg" th:maxlength="10000" th:width="10000"
+                              th:text="${matchEvaluationPlayer.evaluationVerbal}" disabled name="verbal_evaluation"
+                              rows="10" id="verbal_evaluation"></textarea>
+                </div>
+
+                <div class="d-flex mt-3">
+                    <div class="d-flex flex-column match-flex">
+                        <h4 class="mb-3">Numerical evaluations</h4>
+
+                        <div class="form-group row">
+                            <label class="col-sm-8 col-form-label" for="tactical_discipline">Tactical discipline</label>
+                            <div class="col-sm-4">
+                                <input th:value="${matchEvaluationPlayer.evaluationTacticalDiscipline}" disabled
+                                       type="number"
+                                       name="tactical_discipline" id="tactical_discipline" class="form-control input-lg"
+                                       required="true" min="1" max="10"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-8 col-form-label" for="team_play">Team Play</label>
+                            <div class="col-sm-4">
+                                <input th:value="${matchEvaluationPlayer.evaluationTeamPlay}" disabled type="number"
+                                       name="team_play" id="team_play" class="form-control input-lg" required="true"
+                                       min="1"
+                                       max="10"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-8 col-form-label" for="defense">Defense</label>
+                            <div class="col-sm-4">
+                                <input th:value="${matchEvaluationPlayer.evaluationDefense}" disabled type="number"
+                                       name="defense" id="defense" class="form-control input-lg" required="true" min="1"
+                                       max="10"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-8 col-form-label" for="offense">Offense</label>
+                            <div class="col-sm-4">
+                                <input th:value="${matchEvaluationPlayer.evaluationOffense}" disabled type="number"
+                                       name="offense" id="offense" class="form-control input-lg" required="true" min="1"
+                                       max="10"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-8 col-form-label" for="engagement">Engagement</label>
+                            <div class="col-sm-4">
+                                <input th:value="${matchEvaluationPlayer.evaluationEngagement}" disabled type="number"
+                                       name="engagement" id="engagement"
+                                       class="form-control input-lg" required="true" min="1" max="10"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="match-flex"></div>
+
+                    <div class="d-flex flex-column match-flex justify-content-center align-items-center">
+                        <div class="d-flex flex-column justify-content-center mb-xl-5">
+                            <h4 class="mb-3">Total score</h4>
+                            <h3 class="text-center" id="total_evaluation" th:text="${playerScore}"></h3>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <div th:if="${matchEvaluationScout!=null}">
+                <form class="mt-4 d-flex flex-column justify-content-center">
+                    <div class="d-flex justify-content-around">
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_goals">Goals</label>
+                            <input type="number" name="goals" id="scout_goals" class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.goals}" disabled placeholder="Goals" required="true"
+                                   min="0"/>
+                        </div>
+
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_assists">Assists</label>
+                            <input type="number" name="assists" id="scout_assists" class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.assists}" disabled placeholder="Assists"
+                                   required="true" min="0"/>
+                        </div>
+
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_chances_created">Chances created</label>
+                            <input type="number" name="chances_created" id="scout_chances_created"
+                                   class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.chancesCreated}" disabled
+                                   placeholder="Chances created" required="true" min="0"/>
+                        </div>
+
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_shots">Shots</label>
+                            <input type="number" name="shots" id="scout_shots" class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.shots}" disabled placeholder="Shots" required="true"
+                                   min="0"/>
+                        </div>
+
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_shots_on_target">Shots on target</label>
+                            <input type="number" name="shots_on_target" id="scout_shots_on_target"
+                                   class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.shotsOnTarget}" disabled
+                                   placeholder="Shots on target" required="true" min="0"/>
+                        </div>
+
+                        <div class="form-group input-field">
+                            <label for="scout_passes_completed">Passes completed</label>
+                            <input type="number" name="passes_completed" id="scout_passes_completed"
+                                   class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.passesCompleted}" disabled
+                                   placeholder="Passes completed" required="true" min="0"/>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_passes">Passes</label>
+                            <input type="number" name="passes" id="scout_passes" class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.passes}" disabled placeholder="Passes"
+                                   required="true" min="0"/>
+                        </div>
+
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_tackles">Tackles</label>
+                            <input type="number" name="tackles" id="scout_tackles" class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.tackles}" disabled placeholder="Tackles"
+                                   required="true" min="0"/>
+                        </div>
+
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_fouls">Fouls</label>
+                            <input type="number" name="fouls" id="scout_fouls" class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.fouls}" disabled placeholder="Fouls" required="true"
+                                   min="0"/>
+                        </div>
+
+                        <div class="form-group input-field mr-3">
+                            <label for="scout_interceptions">Interceptions</label>
+                            <input type="number" name="interceptions" id="scout_interceptions"
+                                   class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.interceptions}" disabled placeholder="Interceptions"
+                                   required="true" min="0"/>
+                        </div>
+
+                        <div class="form-group input-field">
+                            <label for="scout_played_as">Played as</label>
+                            <input type="text" name="played_as" id="scout_played_as" class="form-control input-lg"
+                                   th:value="${matchEvaluationScout.playedAs}" disabled placeholder="Played as"
+                                   required="true" min="0"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scout_verbal_evaluation">Your verbal evaluation of this match</label>
+                        <textarea class="form-control input-lg" th:maxlength="10000" th:width="10000"
+                                  th:text="${matchEvaluationScout.evaluationVerbal}" disabled name="verbal_evaluation"
+                                  rows="10"
+                                  id="scout_verbal_evaluation"></textarea>
+                    </div>
+
+                    <div class="d-flex mt-3">
+                        <div class="d-flex flex-column match-flex">
+                            <h4 class="mb-3">Numerical evaluations</h4>
+
+                            <div class="form-group row">
+                                <label class="col-sm-8 col-form-label" for="scout_tactical_discipline">Tactical
+                                    discipline</label>
+                                <div class="col-sm-4">
+                                    <input oninput="calculateTotal()" type="number" name="tactical_discipline"
+                                           th:value="${matchEvaluationScout.evaluationTacticalDiscipline}" disabled
+                                           id="scout_tactical_discipline"
+                                           class="form-control input-lg" required="true" min="1" max="10"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-8 col-form-label" for="scout_team_play">Team Play</label>
+                                <div class="col-sm-4">
+                                    <input oninput="calculateTotal()" type="number" name="team_play"
+                                           id="scout_team_play"
+                                           th:value="${matchEvaluationScout.evaluationTeamPlay}" disabled
+                                           class="form-control input-lg" required="true" min="1"
+                                           max="10"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-8 col-form-label" for="scout_defense">Defense</label>
+                                <div class="col-sm-4">
+                                    <input oninput="calculateTotal()" type="number" name="defense" id="scout_defense"
+                                           th:value="${matchEvaluationScout.evaluationDefense}" disabled
+                                           class="form-control input-lg" required="true" min="1"
+                                           max="10"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-8 col-form-label" for="scout_offense">Offense</label>
+                                <div class="col-sm-4">
+                                    <input oninput="calculateTotal()" type="number" name="offense" id="scout_offense"
+                                           th:value="${matchEvaluationScout.evaluationOffense}" disabled
+                                           class="form-control input-lg" required="true" min="1"
+                                           max="10"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-8 col-form-label" for="scout_engagement">Engagement</label>
+                                <div class="col-sm-4">
+                                    <input oninput="calculateTotal()" type="number" name="engagement"
+                                           id="scout_engagement"
+                                           th:value="${matchEvaluationScout.evaluationEngagement}" disabled
+                                           class="form-control input-lg" required="true" min="1"
+                                           max="10"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="match-flex"></div>
+
+                        <div class="d-flex flex-column match-flex justify-content-center align-items-center">
+                            <div class="d-flex flex-column justify-content-center mb-xl-5">
+                                <h4 class="mb-3">Total score</h4>
+                                <h3 class="text-center" th:text="${scoutScore}"></h3>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex justify-content-center" th:if="${matchEvaluationScout==null}">
+                <a th:href="@{'/scout/monitoring/open_player/' + ${playerId} + '/open_match/' + ${match.id} + '/add_scout_evaluation'}">
+                    <button class="btn btn-success">Add scout evaluation</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

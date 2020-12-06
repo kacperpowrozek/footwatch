@@ -1,0 +1,74 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    margin-left: -250px;
+    transition: all 0.3s;
+    background: #0063cd;
+    color: white;
+}
+
+#sidebar.active {
+    margin-left: 0;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    color: white;
+    background: #005cbf;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #005cbf;
+    background: #fff;
+}
+
+#content {
+    width: 100%;
+}
+
+.login-button {
+    width: min-content !important;
+}
+
+.input-field {
+    max-width: 450px;
+    width: 100%;
+}
+
+.match-flex {
+    flex: 1;
+}
+
+.match-button {
+    padding: 24px 48px;
+    font-size: 1.5rem;
+}

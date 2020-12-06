@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout_scout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Scout monitoring open player</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex w100 justify-content-between">
+        <h1 th:text="'Player' + ' ' + ${player.name} + ' ' + ${player.surname} + ' ' + 'stats'"></h1>
+        <div>
+            <form id="filter_season" class="form-inline" method="get"
+                  th:action="@{'/scout/monitoring/open_player/' + ${player.id}}">
+                <label class="mr-3" for="selectedSeason">Season</label>
+                <select class="form-control input-lg" name="selectedSeason" id="selectedSeason"
+                        onchange="this.form.submit()">
+                    <option th:attrappend="selected=${selectedSeason == 'None'}?@{true}" value="None">All</option>
+                    <option th:each="season: ${seasons}" th:value="${season}" th:text="${season}"
+                            th:attrappend="selected=${season == selectedSeason}?@{true}"></option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4" th:unless="${playerMatches.isEmpty()}">
+        <table id="match_history" class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Home team</th>
+                <th>Result</th>
+                <th>Away team</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="match : ${playerMatches}">
+                <td th:text="${match.homeTeam}"></td>
+                <td th:text="${match.homeTeamGoals} + ' : ' + ${match.awayTeamGoals}"></td>
+                <td th:text="${match.awayTeam}"></td>
+                <td th:text="${match.date}"></td>
+                <td><a th:href="@{'/scout/monitoring/open_player/' + ${player.id} + '/open_match/' + ${match.id}}">
+                    <button class="btn btn-primary">Open match</button>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${playerMatches.isEmpty()}">
+        This player doesn't have any match yet.
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <button data-toggle="modal" data-target="#monitoringModal" class="btn btn-danger">
+            Delete monitoring
+        </button>
+        <div class="modal fade" id="monitoringModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete monitoring</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this monitoring? This operation is
+                            irreversible.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <a th:href="@{'/scout/monitoring/open_player/' + ${player.id} + '/delete_monitoring/'}">
+                            <button type="button" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

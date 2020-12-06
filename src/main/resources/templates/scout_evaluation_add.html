@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout_scout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Add scout evaluation</title>
+    <script>
+        function calculateTotal() {
+            const evalIds = ["tactical_discipline", "team_play", "defense", "offense", "engagement"];
+
+            const sum = evalIds.map((evalId) => +document.getElementById(evalId).value).reduce((value, acc) => value + acc);
+            const divisor = evalIds.filter((evalId) => document.getElementById(evalId).value !== "").length;
+            console.log(sum, divisor, (sum / divisor).toString());
+
+            document.getElementById("total_evaluation").innerText = (sum / divisor).toFixed(1);
+        }
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <form class="mt-4 d-flex flex-column justify-content-center" method="post"
+          th:action="@{'/scout/monitoring/open_player/' + ${playerId} +  '/open_match/' + ${matchId} + '/add_scout_evaluation'}">
+
+        <h1 class="mb-5" th:align="center">Add your evaluation</h1>
+
+        <div class="d-flex justify-content-around">
+            <div class="form-group input-field mr-3">
+                <label for="goals">Goals</label>
+                <input type="number" name="goals" id="goals" class="form-control input-lg"
+                       placeholder="Goals" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field mr-3">
+                <label for="assists">Assists</label>
+                <input type="number" name="assists" id="assists" class="form-control input-lg"
+                       placeholder="Assists" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field mr-3">
+                <label for="chances_created">Chances created</label>
+                <input type="number" name="chances_created" id="chances_created" class="form-control input-lg"
+                       placeholder="Chances created" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field mr-3">
+                <label for="shots">Shots</label>
+                <input type="number" name="shots" id="shots" class="form-control input-lg"
+                       placeholder="Shots" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field mr-3">
+                <label for="shots_on_target">Shots on target</label>
+                <input type="number" name="shots_on_target" id="shots_on_target" class="form-control input-lg"
+                       placeholder="Shots on target" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field">
+                <label for="passes_completed">Passes completed</label>
+                <input type="number" name="passes_completed" id="passes_completed" class="form-control input-lg"
+                       placeholder="Passes completed" required="true" min="0"/>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-around">
+            <div class="form-group input-field mr-3">
+                <label for="passes">Passes</label>
+                <input type="number" name="passes" id="passes" class="form-control input-lg"
+                       placeholder="Passes" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field mr-3">
+                <label for="tackles">Tackles</label>
+                <input type="number" name="tackles" id="tackles" class="form-control input-lg"
+                       placeholder="Tackles" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field mr-3">
+                <label for="fouls">Fouls</label>
+                <input type="number" name="fouls" id="fouls" class="form-control input-lg"
+                       placeholder="Fouls" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field mr-3">
+                <label for="interceptions">Interceptions</label>
+                <input type="number" name="interceptions" id="interceptions" class="form-control input-lg"
+                       placeholder="Interceptions" required="true" min="0"/>
+            </div>
+
+            <div class="form-group input-field">
+                <label for="played_as">Played as</label>
+                <input type="text" name="played_as" id="played_as" class="form-control input-lg"
+                       placeholder="Played as" required="true" min="0"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="verbal_evaluation">Your verbal evaluation of this match</label>
+            <textarea class="form-control input-lg" th:maxlength="10000" th:width="10000" name="verbal_evaluation"
+                      rows="10" id="verbal_evaluation"></textarea>
+        </div>
+
+        <div class="d-flex mt-3">
+            <div class="d-flex flex-column match-flex">
+                <h4 class="mb-3">Numerical evaluations</h4>
+
+                <div class="form-group row">
+                    <label class="col-sm-8 col-form-label" for="tactical_discipline">Tactical discipline</label>
+                    <div class="col-sm-4">
+                        <input oninput="calculateTotal()" type="number" name="tactical_discipline"
+                               id="tactical_discipline"
+                               class="form-control input-lg" required="true" min="1" max="10"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-8 col-form-label" for="team_play">Team Play</label>
+                    <div class="col-sm-4">
+                        <input oninput="calculateTotal()" type="number" name="team_play" id="team_play"
+                               class="form-control input-lg" required="true" min="1" max="10"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-8 col-form-label" for="defense">Defense</label>
+                    <div class="col-sm-4">
+                        <input oninput="calculateTotal()" type="number" name="defense" id="defense"
+                               class="form-control input-lg" required="true" min="1" max="10"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-8 col-form-label" for="offense">Offense</label>
+                    <div class="col-sm-4">
+                        <input oninput="calculateTotal()" type="number" name="offense" id="offense"
+                               class="form-control input-lg" required="true" min="1" max="10"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-8 col-form-label" for="engagement">Engagement</label>
+                    <div class="col-sm-4">
+                        <input oninput="calculateTotal()" type="number" name="engagement" id="engagement"
+                               class="form-control input-lg" required="true" min="1" max="10"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="match-flex"></div>
+
+            <div class="d-flex flex-column match-flex justify-content-center align-items-center">
+                <div class="d-flex flex-column justify-content-center mb-xl-5">
+                    <h4 class="mb-3">Total score</h4>
+                    <h3 class="text-center" id="total_evaluation"></h3>
+                </div>
+
+                <div>
+                    <input type="submit" class="btn btn-lg match-button btn-success btn-block"
+                           value="Confirm evaluation"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
