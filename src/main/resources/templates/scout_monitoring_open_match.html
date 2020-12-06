@@ -8,7 +8,7 @@
 <body>
 <div layout:fragment="content">
     <div th:if="${successText!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
-        <span th:text="${successText}"></span>
+        <span id="success_text" th:text="${successText}"></span>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -49,7 +49,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" role="tab" aria-selected="false" href="#menu1">
+            <a id="scout_evaluation" class="nav-link" data-toggle="tab" role="tab" aria-selected="false" href="#menu1">
                 Scout evaluation
             </a>
         </li>
@@ -59,7 +59,8 @@
         <div id="home" class="tab-pane fade show active">
             <form class="mt-4 d-flex flex-column justify-content-center">
                 <div class="form-group">
-                    <label for="verbal_evaluation">Your verbal evaluation of this match</label>
+                    <label for="verbal_evaluation" th:text="'Verbal evaluation of this match from player: ' +
+                    ${player.getName()} + ' ' + ${player.getSurname()}">Player verbal evaluation of this match</label>
                     <textarea class="form-control input-lg" th:maxlength="10000" th:width="10000"
                               th:text="${matchEvaluationPlayer.evaluationVerbal}" disabled name="verbal_evaluation"
                               rows="10" id="verbal_evaluation"></textarea>
@@ -294,7 +295,7 @@
                 </form>
             </div>
             <div class="d-flex justify-content-center" th:if="${matchEvaluationScout==null}">
-                <a th:href="@{'/scout/monitoring/open_player/' + ${playerId} + '/open_match/' + ${match.id} + '/add_scout_evaluation'}">
+                <a id="add_scout_evaluation" th:href="@{'/scout/monitoring/open_player/' + ${playerId} + '/open_match/' + ${match.id} + '/add_scout_evaluation'}">
                     <button class="btn btn-success">Add scout evaluation</button>
                 </a>
             </div>

@@ -31,10 +31,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="scoutMonitoring : ${scoutMonitoringList}"
+            <tr th:each="scoutMonitoring, iStat : ${scoutMonitoringList}"
                 th:if="${scoutMonitoring.isAcceptedByPlayer()==true}">
                 <td th:text="${scoutMonitoring.player.name}"></td>
-                <td th:text="${scoutMonitoring.player.surname}"></td>
+                <td th:id="'monitoring_surname_' + ${iStat.index}"
+                    th:text="${scoutMonitoring.player.surname}"></td>
                 <td th:text="${scoutMonitoring.player.dateOfBirth}"></td>
                 <td th:text="${scoutMonitoring.player.nationality}"></td>
                 <td th:text="${scoutMonitoring.player.teamName}"></td>
@@ -42,7 +43,7 @@
                 <td th:text="${scoutMonitoring.player.email}"></td>
                 <td th:text="${scoutMonitoring.getStartDate()}"></td>
                 <td>
-                    <a th:href="@{'/scout/monitoring/open_player/' + ${scoutMonitoring.player.id}}">
+                    <a th:id="'open_player_' + ${iStat.index}" th:href="@{'/scout/monitoring/open_player/' + ${scoutMonitoring.player.id}}">
                         <button class="btn btn-primary">Open player</button>
                     </a>
                 </td>

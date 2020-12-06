@@ -35,12 +35,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="match : ${playerMatches}">
-                <td th:text="${match.homeTeam}"></td>
+            <tr th:each="match, iStat : ${playerMatches}">
+                <td th:id="'home_team_' + ${iStat.index}" th:text="${match.homeTeam}"></td>
                 <td th:text="${match.homeTeamGoals} + ' : ' + ${match.awayTeamGoals}"></td>
                 <td th:text="${match.awayTeam}"></td>
                 <td th:text="${match.date}"></td>
-                <td><a th:href="@{'/scout/monitoring/open_player/' + ${player.id} + '/open_match/' + ${match.id}}">
+                <td><a th:id="'open_match_' + ${iStat.index}" th:href="@{'/scout/monitoring/open_player/' + ${player.id} + '/open_match/' + ${match.id}}">
                     <button class="btn btn-primary">Open match</button>
                 </a></td>
             </tr>

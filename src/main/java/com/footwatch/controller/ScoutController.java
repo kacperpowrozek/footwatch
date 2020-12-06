@@ -169,6 +169,8 @@ public class ScoutController {
         model.addAttribute("matchEvaluationScout", mes);
         model.addAttribute("successText", successText);
         model.addAttribute("playerId", playerId);
+        Player player = playerService.getOne(Long.parseLong(playerId));
+        model.addAttribute("player", player);
         return "scout_monitoring_open_match";
     }
 
