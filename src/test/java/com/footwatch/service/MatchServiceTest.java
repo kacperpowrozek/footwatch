@@ -3,7 +3,6 @@ package com.footwatch.service;
 import com.footwatch.model.Match;
 import com.footwatch.model.Player;
 import com.footwatch.repository.MatchRepository;
-import com.footwatch.repository.PlayerRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

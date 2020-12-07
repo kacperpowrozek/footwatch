@@ -31,7 +31,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="scoutMonitoring, iStat : ${scoutMonitoringList}"
+            <tr th:each="scoutMonitoring, iStat : ${scoutMonitoringAcceptedList}"
                 th:if="${scoutMonitoring.isAcceptedByPlayer()==true}">
                 <td th:text="${scoutMonitoring.player.name}"></td>
                 <td th:id="'monitoring_surname_' + ${iStat.index}"
@@ -56,6 +56,7 @@
     </div>
     <br><br>
     <h1>My pending monitoring requests</h1>
+
     <div class="mt-4" th:unless="${playersWithPendingRequestFromScout.isEmpty()}">
         <table class="table table-striped table-responsive-md">
             <thead>
@@ -72,7 +73,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="scoutMonitoring, iStat : ${scoutMonitoringList}"
+            <tr th:each="scoutMonitoring, iStat : ${scoutMonitoringRequested}"
                 th:if="${scoutMonitoring.isAcceptedByPlayer()==false}">
                 <td th:text="${scoutMonitoring.player.name}"></td>
                 <td th:id="'monitoring_request_surname_' + ${iStat.index}"

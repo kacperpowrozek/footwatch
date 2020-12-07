@@ -63,11 +63,15 @@ public class ScoutController {
             List<Player> monitoredPlayers = monitoringService.getAllMonitoredPlayers(authentication.getName());
             List<Player> playersWithPendingRequestFromScout = monitoringService.getAllPlayersWithPendingRequest(authentication.getName());
             List<Monitoring> scoutMonitoringList = new ArrayList<>(scout.getMonitoring());
-            scoutMonitoringList.sort(Comparator.comparing(Monitoring::getStartDate).reversed());
+            List<Monitoring> scoutMonitoringAcceptedList = scoutMonitoringList.stream().filter(Monitoring::isAcceptedByPlayer).collect(Collectors.toList());
+            List<Monitoring> scoutMonitoringRequested = scoutMonitoringList.stream().filter(sma -> !sma.isAcceptedByPlayer()).collect(Collectors.toList());
+            scoutMonitoringAcceptedList.sort(Comparator.comparing(Monitoring::getStartDate).reversed());
+            scoutMonitoringRequested.sort(Comparator.comparing(Monitoring::isAcceptedByPlayer));
             model.addAttribute("monitoredPlayers", monitoredPlayers);
             model.addAttribute("playersWithPendingRequestFromScout", playersWithPendingRequestFromScout);
             model.addAttribute("scout", scout);
-            model.addAttribute("scoutMonitoringList", scoutMonitoringList);
+            model.addAttribute("scoutMonitoringAcceptedList", scoutMonitoringAcceptedList);
+            model.addAttribute("scoutMonitoringRequested", scoutMonitoringRequested);
             model.addAttribute("successText", successText);
             return "scout_monitoring";
         }
