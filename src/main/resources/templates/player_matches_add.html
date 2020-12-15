@@ -25,13 +25,13 @@
             <div class="form-group input-field mr-3">
                 <label for="home_team">Home team</label>
                 <input type="text" name="home_team" id="home_team" class="form-control input-lg"
-                       placeholder="Home team" required="true"/>
+                       placeholder="Home team" required="true" maxlength="50"/>
             </div>
 
             <div class="form-group input-field">
                 <label for="away_team">Away team</label>
                 <input type="text" name="away_team" id="away_team" class="form-control input-lg"
-                       placeholder="Away team" required="true"/>
+                       placeholder="Away team" required="true" maxlength="50"/>
             </div>
         </div>
 
@@ -39,13 +39,13 @@
             <div class="form-group input-field mr-3">
                 <label for="home_team_goals">Home team goals</label>
                 <input type="number" name="home_team_goals" id="home_team_goals" class="form-control input-lg"
-                       placeholder="Home team goals" required="true"/>
+                       placeholder="Home team goals" required="true" min="0"/>
             </div>
 
             <div class="form-group input-field">
                 <label for="away_team_goals">Away team goals</label>
                 <input type="number" name="away_team_goals" id="away_team_goals" class="form-control input-lg"
-                       placeholder="Away team goals" required="true"/>
+                       placeholder="Away team goals" required="true" min="0"/>
             </div>
         </div>
 
@@ -68,14 +68,14 @@
             <div class="form-group input-field mr-3">
                 <label for="date">Date</label>
                 <input type="date" name="date" id="date" class="form-control input-lg"
-                       placeholder="Date" required="true"/>
+                       placeholder="Date" required="true" oninput=""/>
             </div>
         </div>
 
         <div class="form-group">
             <label for="link_to_video">Link to video</label>
             <input type="text" name="link_to_video" id="link_to_video" class="form-control input-lg"
-                   placeholder="Link to video" required="true"/>
+                   placeholder="Link to video" required="true" maxlength="100"/>
         </div>
 
         <div class="form-group">
