@@ -16,15 +16,12 @@
     <link rel="stylesheet" href="/css/style.css"/>
     <title>Register as player</title>
     <script>
-        function validateYear() {
-            const dateInput = document.getElementById("date");
+        function validateDate() {
+            const dateInput = document.getElementById("date_of_birth");
             const date = new Date(dateInput.value);
-            if(date.getFullYear() > new Date().getFullYear()) {
-                dateInput.value = "2019-12-31";
-                console.log("value")
-            }
-            else {
-                console.log("else")
+            if(date > new Date()) {
+                window.alert("Date must be less than or equal to today's date!");
+                dateInput.value = new Date();
             }
         }
     </script>
@@ -80,7 +77,7 @@
                 Date of birth
             </label>
             <input type="date" name="date_of_birth" id="date_of_birth" class="form-control input-lg"
-                   placeholder="Date of birth" required="true" maxlength="50" oninput="validateYear()"/>
+                   placeholder="Date of birth" required="true" maxlength="50" oninput="validateDate()"/>
         </div>
 
         <div class="form-group input-field">
